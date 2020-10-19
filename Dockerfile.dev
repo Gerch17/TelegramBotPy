@@ -24,4 +24,4 @@ COPY ./entrypoint.dev.sh .
 COPY . .
 
 # run entrypoint.dev.sh
-ENTRYPOINT ["/usr/src/app/entrypoint.dev.sh"]
+CMD ["python3", "bot.py"]
