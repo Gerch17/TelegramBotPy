@@ -4,7 +4,9 @@ import os
 
 from telebot import types
 
-bot = telebot.TeleBot('1189543200:AAHh_yaCt37hnXIm5oNrF5RL8wMKfThWoSo')
+AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
+
+bot = telebot.TeleBot(AUTH_TOKEN)
 
 @bot.message_handler(commands=['start'])
 def getStarted(message):
