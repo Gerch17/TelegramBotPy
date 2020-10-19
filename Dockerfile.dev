@@ -21,7 +21,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 
-RUN mkdir ./media/
+#RUN mkdir ./media/
 
 # run entrypoint.dev.sh
 CMD ["python3", "bot.py"]
