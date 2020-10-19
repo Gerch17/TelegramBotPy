@@ -4,6 +4,7 @@ import os
 from telebot import types
 
 AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
+MEDIA_PATH = os.environ.get("MEDIA_PATH")
 
 bot = telebot.TeleBot(AUTH_TOKEN)
 
@@ -26,7 +27,7 @@ def download(message):
     file_infos = bot.get_file(message.document.file_id)
     downloaded_file = bot.download_file(file_infos.file_path)
 
-    src = '/home/gerch/Desktop/PhotoBot/media/' + message.from_user.username + '.jpg'
+    src = MEDIA_PATH + message.from_user.username + '.jpg'
     with open(src, 'wb') as new_file:
         new_file.write(downloaded_file)
     bot.reply_to(message, "Спасибо, фотограифия была добавлена")
