@@ -33,3 +33,6 @@ def download(message):
     bot.reply_to(message, "Спасибо, фотограифия была добавлена")
 
 bot.polling(none_stop=True)
+
+#docker run -e AUTH_TOKEN=<token> \tg-bot-py-v $(PWD):/chroot
+#scp -r root@165.227.166.237:/root/app/TelegramBotPy/media /home/gerch/Desktop/media
