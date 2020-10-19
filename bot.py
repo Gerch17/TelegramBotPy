@@ -1,5 +1,4 @@
 import telebot
-import config
 import os
 
 from telebot import types
