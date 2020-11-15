@@ -48,7 +48,7 @@ def helpDef(message):
 
 @bot.message_handler(commands=['instruction'])
 def sendinfInstruction(message):
-    bot.send_video(message.chat.id, 'BAACAgIAAxkBAAICKV-xUzwxG0O4g_FwEDhgRaoD2w74AAKbCQACp0qJSbGcszQIsjS_HgQ')
+    bot.send_video(message.chat.id, 'BAACAgIAAxkBAAMMX7FX03zJauXhwXR1Hgt_V550TgcAAiELAAI2MIhJi8HoOTFnKUUeBA')
 
 #downloading photos
 @bot.message_handler(content_types=["document"])
@@ -60,7 +60,7 @@ def download(message):
                 file_infos = bot.get_file(message.document.file_id)
                 downloaded_file = bot.download_file(file_infos.file_path)
                 #Here is the path
-                src = "MEDIA_PATH" + message.from_user.username + '.jpg'
+                src = MEDIA_PATH + message.from_user.username + '.jpg'
                 with open(src, 'wb') as new_file:
                     new_file.write(downloaded_file)
                 bot.reply_to(message, "Спасибо за участие, фотограифия была добавлена")
@@ -70,6 +70,7 @@ def download(message):
             bot.send_message(message.chat.id, "Поддерживаются форматы только .jpg  и .png")
     else:
         bot.send_message(message.chat.id, "Похоже, что у Вас не установлено имя пользователя в Вашем профиле")
+
 
 bot.polling(none_stop=True)
 
