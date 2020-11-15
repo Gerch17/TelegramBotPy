@@ -33,29 +33,31 @@ def parseFromat(line):
 def getStarted(message):
     #creating keyboard
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    item1 = types.KeyboardButton("/help")
-    item2 = types.KeyboardButton("/instruction")
+    item1 = types.KeyboardButton("Помощь")
+    item2 = types.KeyboardButton("Инструкция")
     markup.add(item1, item2)
 
-    bot.send_message(message.chat.id, "Давайте начнём! Используй команду /help для большей информации".
+    bot.send_message(message.chat.id, "Давайте начнём! Используй команду \"Помощь\" для большей информации".
     format(message.from_user, bot.get_me()), parse_mode='html',
     reply_markup=markup)
 
+@bot.message_handler(content_types=["text"])
+def answer(message):
+    if message.text == 'Инструкция':
+        bot.send_video(message.chat.id, 'BAACAgIAAxkBAAMMX7FX03zJauXhwXR1Hgt_V550TgcAAiELAAI2MIhJi8HoOTFnKUUeBA')
+    elif message.text == 'Помощь':
+        bot.send_message(message.chat.id, 'Для того, чтобы принять участие в конкурсе, просто отправьте мне Вашу работу как файл, если отправка происходит с телефона. Если Вы работаете с компьютера, отправляйте без сжатия. Работы принимаются с четверга по субботу включительно. Можете отправлять несколько работ, но зачтётся только последняя. Если у Вас возникли проблемы с отправкой работы, посмотрите \"Инструкция\". У Вашего профиля Telegram должно быть установлено имя пользователя, чтобы мы могли с Вами связаться')
+    else:
+        bot.send_video(message.chat.id, 'Извините, не понял Вас')
 
-@bot.message_handler(commands=['help'])
-def helpDef(message):
-    bot.send_message(message.chat.id, 'Для того, чтобы принять участие в конкурсе, просто отправьте мне Вашу работу как файл. Работы принимаются с четверга по субботу включительно. Можете отправлять несколько работ, но зачтётся только последняя. Если у Вас возникли проблемы с отправкой работы, посмотрите /instruction. У Вашего профиля Telegram должно быть установлено имя пользователя, чтобы мы могли с Вами связаться')
 
-@bot.message_handler(commands=['instruction'])
-def sendinfInstruction(message):
-    bot.send_video(message.chat.id, 'BAACAgIAAxkBAAMMX7FX03zJauXhwXR1Hgt_V550TgcAAiELAAI2MIhJi8HoOTFnKUUeBA')
 
 #downloading photos
 @bot.message_handler(content_types=["document"])
 def download(message):
     if message.from_user.username != None:
         if parseFromat(message.document.file_name) == 1:
-            if (dayOfWeek() == 3 or dayOfWeek() == 4 or dayOfWeek() == 5): 
+            if (dayOfWeek() == 6 or dayOfWeek() == 4 or dayOfWeek() == 5): 
                 chat_id = message.chat.id
                 file_infos = bot.get_file(message.document.file_id)
                 downloaded_file = bot.download_file(file_infos.file_path)
