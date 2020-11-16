@@ -73,6 +73,14 @@ def download(message):
     else:
         bot.send_message(message.chat.id, "Похоже, что у Вас не установлено имя пользователя в Вашем профиле")
 
+@bot.message_handler(content_types=["photo"])
+    bot.send_message(message.chat.id, "Отправьте мне Вашу работу как файл, если отправка происходит с телефона. Если Вы работаете с компьютера, отправляйте без сжатия")
+
+@bot.message_handler(content_types=["video"])
+    bot.send_message(message.chat.id, "В качестве работ принимаются только фотографии")
+
+@bot.message_handler(content_types=["audio"])
+    @bot.message_handler(content_types=["video"])
 
 bot.polling(none_stop=True)
 
