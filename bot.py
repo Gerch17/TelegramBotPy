@@ -6,7 +6,7 @@ from datetime import datetime, date, time
 from telebot import types
 
 AUTH_TOKEN = os.environ.get("AUTH_TOKEN")
-MEDIA_PATH = os.environ.get("MEDIA_PATH")
+#MEDIA_PATH = os.environ.get("MEDIA_PATH")
 
 bot = telebot.TeleBot(AUTH_TOKEN)
 
@@ -62,7 +62,7 @@ def download(message):
                 file_infos = bot.get_file(message.document.file_id)
                 downloaded_file = bot.download_file(file_infos.file_path)
                 #Here is the path
-                src = MEDIA_PATH + message.from_user.username + '.jpg'
+                src = '/app/TelegramBotPy/media/' + message.from_user.username + '.jpg'
                 with open(src, 'wb') as new_file:
                     new_file.write(downloaded_file)
                 bot.reply_to(message, "Спасибо за участие, фотограифия была добавлена")
@@ -84,6 +84,10 @@ def exception_video(message):
 @bot.message_handler(content_types=["audio"])
 def exception_audio(message):
     bot.send_message(message.chat.id, "В качестве работ принимаются только фотографии")
+
+@bot.message_handler(content_types=["voice"])
+def exception_voice(message):
+    bot.send_message(message.chat.id, "К сожалению я не могу это послушать")
 
 bot.polling(none_stop=True)
 
